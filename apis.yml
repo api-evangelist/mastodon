@@ -1,30 +1,34 @@
 aid: mastodon
-name: Mastodon
-description: >-
-  A primer on REST APIs, HTTP requests and responses, and parameters. An
-  introduction to REST Mastodon provides access to its data over a REST API.
-type: Index
-position: Consumer
-access: 3rd-Party
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-tags:
-  - API
-created: '2024-11-16'
-modified: '2024-11-16'
 url: https://raw.githubusercontent.com/api-search/mastodon/refs/heads/main/apis.yml
-specificationVersion: '0.19'
 apis:
   - aid: mastodon:mastodon
     name: Mastodon
+    tags:
+      - API
+    humanURL: https://docs.joinmastodon.org/client/intro/
+    properties:
+      - url: https://docs.joinmastodon.org/client/intro/
+        type: Documentation
     description: >-
       A primer on REST APIs, HTTP requests and responses, and parameters. An
       introduction to REST Mastodon provides access to its data over a REST API.
-    humanURL: https://docs.joinmastodon.org/client/intro/
-    tags:
-      - API
-    properties:
-      - type: Documentation
-        url: https://docs.joinmastodon.org/client/intro/
+name: Mastodon
+tags:
+  - Open-Source
+  - Social Networks
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+created: '2024-11-16'
+modified: '2024-11-16'
+position: Consumer
+description: >-
+  Mastodon is a open source, self-hosted, social networking service. Mastodon
+  uses the ActivityPub protocol for federation which allows users to communicate
+  between independent Mastodon instances and other ActivityPub compatible
+  services. Mastodon has microblogging features similar to Twitter, and is
+  generally considered to be a part of the Fediverse.
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
+specificationVersion: '0.19'
