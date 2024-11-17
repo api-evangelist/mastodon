@@ -5,7 +5,7 @@ apis:
     name: Mastodon
     tags:
       - Social Networks
-    humanURL: https://docs.joinmastodon.org/client/intro/
+    humanURL: https://docs.joinmastodon.org/
     properties:
       - url: https://docs.joinmastodon.org/client/intro/
         type: Documentation
