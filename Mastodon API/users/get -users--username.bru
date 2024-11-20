@@ -1,0 +1,11 @@
+meta {
+  name: get -users--username
+  type: http
+  seq: 16
+}
+
+get {
+  url: {{baseUrl}}/users/:username
+  body: none
+  auth: none
+}

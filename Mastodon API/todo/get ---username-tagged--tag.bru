@@ -1,0 +1,11 @@
+meta {
+  name: get ---username-tagged--tag
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{baseUrl}}/@:username/tagged/:tag
+  body: none
+  auth: none
+}

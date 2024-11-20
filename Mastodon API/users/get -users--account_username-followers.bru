@@ -1,0 +1,11 @@
+meta {
+  name: get -users--account_username-followers
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{baseUrl}}/users/:account_username/followers
+  body: none
+  auth: none
+}

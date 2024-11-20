@@ -1,0 +1,11 @@
+meta {
+  name: delete -admin-site_uploads--id
+  type: http
+  seq: 37
+}
+
+delete {
+  url: {{baseUrl}}/admin/site_uploads/:id
+  body: none
+  auth: none
+}

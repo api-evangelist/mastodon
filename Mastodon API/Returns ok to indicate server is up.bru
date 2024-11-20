@@ -1,0 +1,11 @@
+meta {
+  name: Returns ok to indicate server is up
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/health
+  body: none
+  auth: none
+}

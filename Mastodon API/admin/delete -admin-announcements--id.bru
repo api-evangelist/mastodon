@@ -1,0 +1,11 @@
+meta {
+  name: delete -admin-announcements--id
+  type: http
+  seq: 33
+}
+
+delete {
+  url: {{baseUrl}}/admin/announcements/:id
+  body: none
+  auth: none
+}

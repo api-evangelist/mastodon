@@ -1,0 +1,11 @@
+meta {
+  name: Test to make sure that the user token works-
+  type: http
+  seq: 77
+}
+
+get {
+  url: {{baseUrl}}/api/v1/accounts/verify_credentials
+  body: none
+  auth: none
+}

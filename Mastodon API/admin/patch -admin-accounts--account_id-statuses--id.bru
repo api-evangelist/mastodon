@@ -1,0 +1,11 @@
+meta {
+  name: patch -admin-accounts--account_id-statuses--id
+  type: http
+  seq: 89
+}
+
+patch {
+  url: {{baseUrl}}/admin/accounts/:account_id/statuses/:id
+  body: none
+  auth: none
+}

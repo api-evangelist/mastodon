@@ -1,0 +1,11 @@
+meta {
+  name: patch -admin-accounts--account_id-change_email
+  type: http
+  seq: 81
+}
+
+patch {
+  url: {{baseUrl}}/admin/accounts/:account_id/change_email
+  body: none
+  auth: none
+}

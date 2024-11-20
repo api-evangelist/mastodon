@@ -1,0 +1,11 @@
+meta {
+  name: get -users--account_username-statuses--id-activity
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/users/:account_username/statuses/:id/activity
+  body: none
+  auth: none
+}

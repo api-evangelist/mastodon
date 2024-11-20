@@ -1,0 +1,11 @@
+meta {
+  name: Creates a user and account records- Returns an account access token for the app that initiated the request- The app should save this token for later- and should wait for the user to confirm their account by clicking a link in their email inbox-
+  type: http
+  seq: 98
+}
+
+post {
+  url: {{baseUrl}}/api/v1/accounts
+  body: none
+  auth: none
+}

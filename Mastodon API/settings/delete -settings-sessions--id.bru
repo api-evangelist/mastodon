@@ -1,0 +1,11 @@
+meta {
+  name: delete -settings-sessions--id
+  type: http
+  seq: 60
+}
+
+delete {
+  url: {{baseUrl}}/settings/sessions/:id
+  body: none
+  auth: none
+}

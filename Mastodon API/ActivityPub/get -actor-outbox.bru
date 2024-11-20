@@ -1,0 +1,11 @@
+meta {
+  name: get -actor-outbox
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/actor/outbox
+  body: none
+  auth: none
+}

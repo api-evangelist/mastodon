@@ -1,0 +1,11 @@
+meta {
+  name: get -api-v1-statuses--status_id-reblogged_by
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/v1/statuses/:status_id/reblogged_by
+  body: none
+  auth: none
+}

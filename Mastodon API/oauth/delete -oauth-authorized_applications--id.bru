@@ -1,0 +1,11 @@
+meta {
+  name: delete -oauth-authorized_applications--id
+  type: http
+  seq: 17
+}
+
+delete {
+  url: {{baseUrl}}/oauth/authorized_applications/:id
+  body: none
+  auth: none
+}

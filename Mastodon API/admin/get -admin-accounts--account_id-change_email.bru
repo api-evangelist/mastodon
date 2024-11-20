@@ -1,0 +1,11 @@
+meta {
+  name: get -admin-accounts--account_id-change_email
+  type: http
+  seq: 80
+}
+
+get {
+  url: {{baseUrl}}/admin/accounts/:account_id/change_email
+  body: none
+  auth: none
+}

@@ -1,0 +1,11 @@
+meta {
+  name: delete -admin-email_domain_blocks--id
+  type: http
+  seq: 16
+}
+
+delete {
+  url: {{baseUrl}}/admin/email_domain_blocks/:id
+  body: none
+  auth: none
+}

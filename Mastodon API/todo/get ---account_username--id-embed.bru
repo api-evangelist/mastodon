@@ -1,0 +1,11 @@
+meta {
+  name: get ---account_username--id-embed
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{baseUrl}}/@:account_username/:id/embed
+  body: none
+  auth: none
+}

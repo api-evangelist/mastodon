@@ -1,0 +1,11 @@
+meta {
+  name: delete -invites--id
+  type: http
+  seq: 20
+}
+
+delete {
+  url: {{baseUrl}}/invites/:id
+  body: none
+  auth: none
+}

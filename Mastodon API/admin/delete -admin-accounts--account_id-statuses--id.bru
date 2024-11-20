@@ -1,0 +1,11 @@
+meta {
+  name: delete -admin-accounts--account_id-statuses--id
+  type: http
+  seq: 91
+}
+
+delete {
+  url: {{baseUrl}}/admin/accounts/:account_id/statuses/:id
+  body: none
+  auth: none
+}

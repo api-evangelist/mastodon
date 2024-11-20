@@ -1,0 +1,11 @@
+meta {
+  name: delete -admin-domain_allows--id
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/admin/domain_allows/:id
+  body: none
+  auth: none
+}

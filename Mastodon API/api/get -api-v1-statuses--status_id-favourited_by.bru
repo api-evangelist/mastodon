@@ -1,0 +1,11 @@
+meta {
+  name: get -api-v1-statuses--status_id-favourited_by
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/v1/statuses/:status_id/favourited_by
+  body: none
+  auth: none
+}

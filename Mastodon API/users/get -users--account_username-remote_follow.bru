@@ -1,0 +1,11 @@
+meta {
+  name: get -users--account_username-remote_follow
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/users/:account_username/remote_follow
+  body: none
+  auth: none
+}

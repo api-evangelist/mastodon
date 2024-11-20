@@ -1,0 +1,11 @@
+meta {
+  name: delete -admin-users--user_id-two_factor_authentication
+  type: http
+  seq: 104
+}
+
+delete {
+  url: {{baseUrl}}/admin/users/:user_id/two_factor_authentication
+  body: none
+  auth: none
+}

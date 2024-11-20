@@ -1,0 +1,11 @@
+meta {
+  name: delete -settings-profile-pictures--id
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{baseUrl}}/settings/profile/pictures/:id
+  body: none
+  auth: none
+}

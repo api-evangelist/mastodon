@@ -1,0 +1,11 @@
+meta {
+  name: patch -admin-announcements--id
+  type: http
+  seq: 31
+}
+
+patch {
+  url: {{baseUrl}}/admin/announcements/:id
+  body: none
+  auth: none
+}

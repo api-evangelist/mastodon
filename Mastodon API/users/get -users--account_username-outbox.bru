@@ -1,0 +1,11 @@
+meta {
+  name: get -users--account_username-outbox
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{baseUrl}}/users/:account_username/outbox
+  body: none
+  auth: none
+}

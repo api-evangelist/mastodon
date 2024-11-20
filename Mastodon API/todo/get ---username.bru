@@ -1,0 +1,11 @@
+meta {
+  name: get ---username
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/@:username
+  body: none
+  auth: none
+}

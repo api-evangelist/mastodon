@@ -1,0 +1,11 @@
+meta {
+  name: get -users--account_username-statuses--status_id-replies
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/users/:account_username/statuses/:status_id/replies
+  body: none
+  auth: none
+}

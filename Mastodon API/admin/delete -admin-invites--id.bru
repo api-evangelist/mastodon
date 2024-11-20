@@ -1,0 +1,11 @@
+meta {
+  name: delete -admin-invites--id
+  type: http
+  seq: 41
+}
+
+delete {
+  url: {{baseUrl}}/admin/invites/:id
+  body: none
+  auth: none
+}

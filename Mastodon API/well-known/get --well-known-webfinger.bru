@@ -1,0 +1,16 @@
+meta {
+  name: get --well-known-webfinger
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/.well-known/webfinger
+  body: none
+  auth: none
+}
+
+params:query {
+  resource: 
+  ~rel: 
+}

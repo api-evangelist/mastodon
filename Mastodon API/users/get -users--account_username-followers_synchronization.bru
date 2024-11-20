@@ -1,0 +1,11 @@
+meta {
+  name: get -users--account_username-followers_synchronization
+  type: http
+  seq: 15
+}
+
+get {
+  url: {{baseUrl}}/users/:account_username/followers_synchronization
+  body: none
+  auth: none
+}

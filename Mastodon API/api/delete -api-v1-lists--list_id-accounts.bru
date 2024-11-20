@@ -1,0 +1,11 @@
+meta {
+  name: delete -api-v1-lists--list_id-accounts
+  type: http
+  seq: 101
+}
+
+delete {
+  url: {{baseUrl}}/api/v1/lists/:list_id/accounts
+  body: none
+  auth: none
+}

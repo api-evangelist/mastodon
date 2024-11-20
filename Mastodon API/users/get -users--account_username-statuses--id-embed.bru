@@ -1,0 +1,11 @@
+meta {
+  name: get -users--account_username-statuses--id-embed
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/users/:account_username/statuses/:id/embed
+  body: none
+  auth: none
+}

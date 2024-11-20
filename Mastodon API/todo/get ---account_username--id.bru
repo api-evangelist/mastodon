@@ -1,0 +1,11 @@
+meta {
+  name: get ---account_username--id
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{baseUrl}}/@:account_username/:id
+  body: none
+  auth: none
+}

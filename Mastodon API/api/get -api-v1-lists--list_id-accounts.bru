@@ -1,0 +1,11 @@
+meta {
+  name: get -api-v1-lists--list_id-accounts
+  type: http
+  seq: 100
+}
+
+get {
+  url: {{baseUrl}}/api/v1/lists/:list_id/accounts
+  body: none
+  auth: none
+}

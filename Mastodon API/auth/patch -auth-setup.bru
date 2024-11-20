@@ -1,0 +1,11 @@
+meta {
+  name: patch -auth-setup
+  type: http
+  seq: 2
+}
+
+patch {
+  url: {{baseUrl}}/auth/setup
+  body: none
+  auth: none
+}

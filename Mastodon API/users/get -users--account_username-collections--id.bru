@@ -1,0 +1,11 @@
+meta {
+  name: get -users--account_username-collections--id
+  type: http
+  seq: 14
+}
+
+get {
+  url: {{baseUrl}}/users/:account_username/collections/:id
+  body: none
+  auth: none
+}
