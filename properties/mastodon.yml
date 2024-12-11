@@ -4120,7 +4120,7 @@ paths:
                 id: "14715"
                 username: trwnh
                 acct: trwnh
-                display_name: infinite love ⴳ
+                display_name: infinite love _
                 locked: false
                 bot: false
                 created_at: 2016-11-24T10:02:12.085Z
@@ -4845,7 +4845,7 @@ paths:
                     locked: false
                     bot: false
                     created_at: 2017-02-08T02:00:53.274Z
-                    note: <p>:ms_rainbow_flag:​ :ms_bisexual_flag:​ :ms_nonbinary_flag:​ <a
+                    note: <p>:ms_rainbow_flag:_ :ms_bisexual_flag:_ :ms_nonbinary_flag:_ <a
                       href="https://awoo.space/tags/awoo" class="mention
                       hashtag" rel="nofollow noopener noreferrer"
                       target="_blank">#<span>awoo</span></a>.space <a
@@ -5970,7 +5970,7 @@ components:
         id: "14715"
         username: trwnh
         acct: trwnh
-        display_name: infinite love ⴳ
+        display_name: infinite love _
         locked: false
         bot: false
         created_at: 2016-11-24T10:02:12.085Z
