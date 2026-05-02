@@ -17,7 +17,7 @@ Mastodon is a open source, self-hosted, social networking service. Mastodon uses
 ## Timestamps
 
 - **Created:** 2024-11-16 
-- **Modified:** 2024-11-16 
+- **Modified:** 2026-04-28 
 
 ## APIs
 
@@ -33,7 +33,7 @@ This is an OpenAPI for the Mastodon API.
 #### Properties
 
 - [Documentation](https://docs.joinmastodon.org/client/intro/)
-- [OpenAPI](properties/mastodon.yml)
+- [OpenAPI](openapi/mastodon.yml)
 
 ## Common Properties
 
