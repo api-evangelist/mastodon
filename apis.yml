@@ -33,6 +33,8 @@ maintainers:
     email: info@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/joinmastodon
   - name: Getting started with the API - Mastodon documentation
     url: https://docs.joinmastodon.org/client/intro/
     type: GettingStarted
