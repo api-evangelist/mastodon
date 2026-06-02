@@ -1,0 +1,1037 @@
+asyncapi: 2.6.0
+info:
+  title: Mastodon Streaming and Web Push API
+  version: 1.0.0
+  description: |
+    AsyncAPI 2.6 description of the Mastodon real-time surface.
+
+    Mastodon exposes two complementary asynchronous interfaces:
+
+      * Streaming API - delivers timeline and notification events to a
+        connected client over either a multiplexed WebSocket connection
+        (`wss://<instance>/api/v1/streaming`) or one of several Server-Sent
+        Events (SSE) endpoints under `/api/v1/streaming/...`.
+      * Web Push - delivers notification events to an external push
+        endpoint registered by the client. Mastodon implements the W3C /
+        IETF Web Push standard (RFC 8030 for the protocol, RFC 8291 for
+        message encryption, and RFC 8292 / VAPID for voluntary application
+        server identification).
+
+    Both surfaces emit the same event "shapes" (e.g. a notification, a new
+    status, a deletion) but the transport, framing, subscription model and
+    authentication differ. This document models each transport as one or
+    more AsyncAPI channels.
+
+    Sources:
+      * https://docs.joinmastodon.org/methods/streaming/
+      * https://docs.joinmastodon.org/methods/push/
+      * https://docs.joinmastodon.org/entities/Notification/
+      * RFC 8030, RFC 8291, RFC 8292
+  contact:
+    name: Mastodon Documentation
+    url: https://docs.joinmastodon.org/methods/streaming/
+  license:
+    name: AGPL-3.0
+    url: https://www.gnu.org/licenses/agpl-3.0.html
+  termsOfService: https://joinmastodon.org/
+
+defaultContentType: application/json
+
+servers:
+  websocket:
+    url: "{instance}/api/v1/streaming"
+    protocol: wss
+    description: |
+      Mastodon multiplexed WebSocket streaming endpoint. A single
+      connection can subscribe to multiple streams using `subscribe`
+      control messages, or be locked to a single stream by supplying the
+      `stream` query parameter on connect.
+    variables:
+      instance:
+        default: mastodon.social
+        description: Hostname of the Mastodon instance (no scheme, no path).
+    security:
+      - userToken: []
+      - websocketSubprotocolToken: []
+      - accessTokenQuery: []
+  sse:
+    url: "{instance}/api/v1/streaming"
+    protocol: https
+    description: |
+      Mastodon Server-Sent Events base URL. Specific streams are exposed
+      as sub-paths (e.g. `/user`, `/public`, `/hashtag`). Responses use
+      `Content-Type: text/event-stream` and follow the SSE wire format.
+    variables:
+      instance:
+        default: mastodon.social
+        description: Hostname of the Mastodon instance (no scheme, no path).
+    security:
+      - userToken: []
+      - accessTokenQuery: []
+  webpush:
+    url: "{pushService}"
+    protocol: https
+    description: |
+      External Web Push service (e.g. Mozilla autopush, Google FCM Web
+      Push endpoint, Apple Web Push, or self-hosted). Mastodon acts as
+      the application server and POSTs encrypted push messages to the
+      `endpoint` URL provided by the client at subscription time, per
+      RFC 8030. This server entry represents that outbound delivery
+      channel from Mastodon's perspective.
+    variables:
+      pushService:
+        default: updates.push.services.mozilla.com
+        description: Hostname of the push service operating the subscription endpoint.
+    security:
+      - vapid: []
+
+channels:
+
+  # ---------------------------------------------------------------------------
+  # WebSocket - multiplexed
+  # ---------------------------------------------------------------------------
+  /api/v1/streaming:
+    description: |
+      Multiplexed WebSocket entry point. After connecting, the client
+      either passed `?stream=<name>` (and any required `tag`/`list`) on
+      the upgrade request, or sends one or more JSON `subscribe` control
+      frames to attach to streams. The server emits framed JSON messages
+      identifying which stream produced each event.
+    bindings:
+      ws:
+        bindingVersion: 0.1.0
+        query:
+          type: object
+          properties:
+            stream:
+              type: string
+              description: Initial stream to subscribe to on connect.
+              enum:
+                - user
+                - user:notification
+                - public
+                - public:local
+                - public:remote
+                - public:media
+                - public:local:media
+                - hashtag
+                - hashtag:local
+                - list
+                - direct
+            tag:
+              type: string
+              description: Hashtag name (required when `stream` is `hashtag` or `hashtag:local`).
+            list:
+              type: string
+              description: List ID (required when `stream` is `list`).
+            access_token:
+              type: string
+              description: |
+                User OAuth token. Legacy; prefer the `Authorization`
+                header or the `Sec-WebSocket-Protocol` subprotocol value.
+        headers:
+          type: object
+          properties:
+            Authorization:
+              type: string
+              description: "`Bearer <user_token>` - preferred auth method."
+            Sec-WebSocket-Protocol:
+              type: string
+              description: Alternate location for the user OAuth token.
+    publish:
+      operationId: sendControlMessage
+      summary: Client -> server control message (subscribe / unsubscribe).
+      description: |
+        Manage stream subscriptions on an open WebSocket. The server has
+        no acknowledgement message for these frames; subsequent matching
+        events will simply start (or stop) flowing.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/SubscribeControl'
+          - $ref: '#/components/messages/UnsubscribeControl'
+    subscribe:
+      operationId: receiveStreamFrame
+      summary: Server -> client stream event frame.
+      description: |
+        Every event the server pushes is wrapped in a JSON envelope
+        that identifies the originating stream(s) and the event name.
+        The `payload` field is itself JSON-encoded as a string for
+        object payloads (e.g. Status, Notification), and a bare string
+        for ID-only events (`delete`, `announcement.delete`).
+      message:
+        oneOf:
+          - $ref: '#/components/messages/WsStreamFrame'
+          - $ref: '#/components/messages/WsErrorFrame'
+
+  # ---------------------------------------------------------------------------
+  # SSE channels - one per documented endpoint
+  # ---------------------------------------------------------------------------
+  /api/v1/streaming/health:
+    description: Liveness check. Returns `OK` (plain text) when the streaming server is up.
+    bindings:
+      http:
+        bindingVersion: 0.3.0
+        type: request
+        method: GET
+    subscribe:
+      operationId: streamingHealth
+      summary: Streaming server health probe.
+      message:
+        name: HealthResponse
+        contentType: text/plain
+        payload:
+          type: string
+          const: "OK"
+
+  /api/v1/streaming/user:
+    description: |
+      Home timeline plus notifications for the authenticated user.
+      Requires the `read:statuses` and `read:notifications` scopes.
+    bindings:
+      http:
+        bindingVersion: 0.3.0
+        type: request
+        method: GET
+    subscribe:
+      operationId: streamUser
+      summary: SSE stream of home timeline and notification events.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/UpdateEvent'
+          - $ref: '#/components/messages/DeleteEvent'
+          - $ref: '#/components/messages/NotificationEvent'
+          - $ref: '#/components/messages/StatusUpdateEvent'
+          - $ref: '#/components/messages/ConversationEvent'
+          - $ref: '#/components/messages/FiltersChangedEvent'
+          - $ref: '#/components/messages/AnnouncementEvent'
+          - $ref: '#/components/messages/AnnouncementReactionEvent'
+          - $ref: '#/components/messages/AnnouncementDeleteEvent'
+          - $ref: '#/components/messages/NotificationsMergedEvent'
+
+  /api/v1/streaming/user/notification:
+    description: |
+      Notification-only sub-stream for the authenticated user.
+      Requires `read:notifications`.
+    bindings:
+      http:
+        bindingVersion: 0.3.0
+        type: request
+        method: GET
+    subscribe:
+      operationId: streamUserNotification
+      summary: SSE stream of notification events only.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/NotificationEvent'
+          - $ref: '#/components/messages/NotificationsMergedEvent'
+
+  /api/v1/streaming/public:
+    description: Federated (whole-known-network) public timeline.
+    parameters:
+      only_media:
+        description: When `true`, restrict to statuses with media attachments.
+        schema:
+          type: boolean
+    bindings:
+      http:
+        bindingVersion: 0.3.0
+        type: request
+        method: GET
+    subscribe:
+      operationId: streamPublic
+      summary: SSE stream of the federated public timeline.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/UpdateEvent'
+          - $ref: '#/components/messages/DeleteEvent'
+          - $ref: '#/components/messages/StatusUpdateEvent'
+
+  /api/v1/streaming/public/local:
+    description: Local (this-instance-only) public timeline.
+    parameters:
+      only_media:
+        description: When `true`, restrict to statuses with media attachments.
+        schema:
+          type: boolean
+    bindings:
+      http:
+        bindingVersion: 0.3.0
+        type: request
+        method: GET
+    subscribe:
+      operationId: streamPublicLocal
+      summary: SSE stream of the local public timeline.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/UpdateEvent'
+          - $ref: '#/components/messages/DeleteEvent'
+          - $ref: '#/components/messages/StatusUpdateEvent'
+
+  /api/v1/streaming/public/remote:
+    description: Federated public timeline excluding local posts.
+    parameters:
+      only_media:
+        description: When `true`, restrict to statuses with media attachments.
+        schema:
+          type: boolean
+    bindings:
+      http:
+        bindingVersion: 0.3.0
+        type: request
+        method: GET
+    subscribe:
+      operationId: streamPublicRemote
+      summary: SSE stream of remote-only public timeline.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/UpdateEvent'
+          - $ref: '#/components/messages/DeleteEvent'
+          - $ref: '#/components/messages/StatusUpdateEvent'
+
+  /api/v1/streaming/hashtag:
+    description: Federated stream of statuses bearing a given hashtag.
+    parameters:
+      tag:
+        description: Hashtag name (without the leading `#`). Required.
+        schema:
+          type: string
+    bindings:
+      http:
+        bindingVersion: 0.3.0
+        type: request
+        method: GET
+    subscribe:
+      operationId: streamHashtag
+      summary: SSE stream of statuses tagged with a hashtag (federated).
+      message:
+        oneOf:
+          - $ref: '#/components/messages/UpdateEvent'
+          - $ref: '#/components/messages/DeleteEvent'
+          - $ref: '#/components/messages/StatusUpdateEvent'
+
+  /api/v1/streaming/hashtag/local:
+    description: Local-instance stream of statuses bearing a given hashtag.
+    parameters:
+      tag:
+        description: Hashtag name (without the leading `#`). Required.
+        schema:
+          type: string
+    bindings:
+      http:
+        bindingVersion: 0.3.0
+        type: request
+        method: GET
+    subscribe:
+      operationId: streamHashtagLocal
+      summary: SSE stream of locally-posted statuses tagged with a hashtag.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/UpdateEvent'
+          - $ref: '#/components/messages/DeleteEvent'
+          - $ref: '#/components/messages/StatusUpdateEvent'
+
+  /api/v1/streaming/list:
+    description: Stream of statuses from a user-curated list.
+    parameters:
+      list:
+        description: List ID. Required.
+        schema:
+          type: string
+    bindings:
+      http:
+        bindingVersion: 0.3.0
+        type: request
+        method: GET
+    subscribe:
+      operationId: streamList
+      summary: SSE stream of statuses from a list.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/UpdateEvent'
+          - $ref: '#/components/messages/DeleteEvent'
+          - $ref: '#/components/messages/StatusUpdateEvent'
+
+  /api/v1/streaming/direct:
+    description: |
+      Stream of direct-message conversations involving the authenticated
+      user. Emits `conversation` events with the updated Conversation
+      entity (containing the latest status).
+    bindings:
+      http:
+        bindingVersion: 0.3.0
+        type: request
+        method: GET
+    subscribe:
+      operationId: streamDirect
+      summary: SSE stream of direct-message conversation events.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/ConversationEvent'
+
+  # ---------------------------------------------------------------------------
+  # Web Push - outbound from Mastodon to a registered push endpoint
+  # ---------------------------------------------------------------------------
+  webpush/{endpoint}:
+    description: |
+      Outbound Web Push delivery from Mastodon to the push service URL
+      that the client previously registered via
+      `POST /api/v1/push/subscription`. Mastodon POSTs an `aes128gcm`
+      encrypted body containing a notification payload, signed with the
+      instance's VAPID key pair (RFC 8292).
+
+      Decryption requires the `p256dh` and `auth` keys the client
+      supplied at subscription time (RFC 8291). After decryption the
+      plaintext body is a JSON object describing the notification.
+    parameters:
+      endpoint:
+        description: |
+          Opaque path component of the push service endpoint URL the
+          client registered. Treated as an opaque identifier by Mastodon.
+        schema:
+          type: string
+    bindings:
+      http:
+        bindingVersion: 0.3.0
+        type: request
+        method: POST
+        headers:
+          type: object
+          properties:
+            TTL:
+              type: integer
+              description: RFC 8030 message lifetime in seconds.
+            Urgency:
+              type: string
+              enum: [very-low, low, normal, high]
+              description: RFC 8030 delivery urgency hint.
+            Topic:
+              type: string
+              description: RFC 8030 topic for coalescing replaceable messages.
+            Content-Encoding:
+              type: string
+              const: aes128gcm
+              description: RFC 8188 / RFC 8291 message encryption scheme.
+            Authorization:
+              type: string
+              description: VAPID `vapid t=<JWT>, k=<public key>` credential (RFC 8292).
+    publish:
+      operationId: deliverWebPush
+      summary: Encrypted Web Push notification delivered to the registered endpoint.
+      message:
+        $ref: '#/components/messages/WebPushNotification'
+
+components:
+
+  securitySchemes:
+    userToken:
+      type: oauth2
+      description: |
+        OAuth 2 user token passed as `Authorization: Bearer <token>`.
+        Required scopes depend on the stream (`read:statuses`,
+        `read:notifications`). As of Mastodon 4.2.0, user tokens are
+        required for streaming; public/app tokens were removed.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://mastodon.social/oauth/authorize
+          tokenUrl: https://mastodon.social/oauth/token
+          scopes:
+            "read:statuses": Read timeline statuses.
+            "read:notifications": Read notifications.
+            "push": Manage Web Push subscriptions.
+    websocketSubprotocolToken:
+      type: httpApiKey
+      description: |
+        OAuth user token supplied via `Sec-WebSocket-Protocol` on the
+        WebSocket upgrade. Browser-friendly alternative to an
+        `Authorization` header.
+      name: Sec-WebSocket-Protocol
+      in: header
+    accessTokenQuery:
+      type: httpApiKey
+      description: |
+        Legacy: OAuth user token passed as the `access_token` query
+        parameter. Not recommended for new integrations.
+      name: access_token
+      in: query
+    vapid:
+      type: httpApiKey
+      description: |
+        VAPID (RFC 8292) credential the Mastodon application server
+        presents to the push service. Sent in the `Authorization`
+        header as `vapid t=<signed JWT>, k=<base64url public key>`.
+      name: Authorization
+      in: header
+
+  # ---------------------------------------------------------------------------
+  # Messages
+  # ---------------------------------------------------------------------------
+  messages:
+
+    # WebSocket control frames (client -> server)
+    SubscribeControl:
+      name: SubscribeControl
+      title: Subscribe control frame
+      summary: Client asks the server to start delivering events for a stream.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SubscribeControl'
+
+    UnsubscribeControl:
+      name: UnsubscribeControl
+      title: Unsubscribe control frame
+      summary: Client asks the server to stop delivering events for a stream.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UnsubscribeControl'
+
+    # WebSocket envelope (server -> client)
+    WsStreamFrame:
+      name: WsStreamFrame
+      title: Multiplexed stream frame
+      summary: Wrapped event delivered over the multiplexed WebSocket.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WsStreamFrame'
+
+    WsErrorFrame:
+      name: WsErrorFrame
+      title: WebSocket error frame
+      summary: Server-side error reported over the WebSocket.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WsErrorFrame'
+
+    # SSE events - each carries an `event:` name and a `data:` payload
+    UpdateEvent:
+      name: update
+      title: New status received
+      summary: A new status (post) has appeared in the subscribed timeline.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          event:
+            type: string
+            const: update
+      payload:
+        $ref: '#/components/schemas/Status'
+
+    DeleteEvent:
+      name: delete
+      title: Status deleted
+      summary: A status was deleted; payload is the deleted status ID as a string.
+      contentType: text/plain
+      headers:
+        type: object
+        properties:
+          event:
+            type: string
+            const: delete
+      payload:
+        type: string
+        description: ID of the deleted status.
+
+    NotificationEvent:
+      name: notification
+      title: Notification received
+      summary: A notification (mention, follow, favourite, etc.) was created.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          event:
+            type: string
+            const: notification
+      payload:
+        $ref: '#/components/schemas/Notification'
+
+    StatusUpdateEvent:
+      name: status.update
+      title: Status edited
+      summary: A previously-seen status has been edited.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          event:
+            type: string
+            const: status.update
+      payload:
+        $ref: '#/components/schemas/Status'
+
+    ConversationEvent:
+      name: conversation
+      title: Direct-message conversation updated
+      summary: A direct-message conversation has a new or updated last status.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          event:
+            type: string
+            const: conversation
+      payload:
+        $ref: '#/components/schemas/Conversation'
+
+    FiltersChangedEvent:
+      name: filters_changed
+      title: User filters changed
+      summary: Notification that the user's keyword filters were modified; no payload.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          event:
+            type: string
+            const: filters_changed
+      payload:
+        type: "null"
+
+    AnnouncementEvent:
+      name: announcement
+      title: New announcement published
+      summary: An administrator published a server-wide announcement.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          event:
+            type: string
+            const: announcement
+      payload:
+        $ref: '#/components/schemas/Announcement'
+
+    AnnouncementReactionEvent:
+      name: announcement.reaction
+      title: Reaction added to an announcement
+      summary: A user reacted with an emoji to a server announcement.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          event:
+            type: string
+            const: announcement.reaction
+      payload:
+        $ref: '#/components/schemas/AnnouncementReactionPayload'
+
+    AnnouncementDeleteEvent:
+      name: announcement.delete
+      title: Announcement deleted
+      summary: A server announcement was removed; payload is its ID as a string.
+      contentType: text/plain
+      headers:
+        type: object
+        properties:
+          event:
+            type: string
+            const: announcement.delete
+      payload:
+        type: string
+        description: ID of the deleted announcement.
+
+    NotificationsMergedEvent:
+      name: notifications_merged
+      title: Grouped notifications updated
+      summary: |
+        Server signals that previously delivered notifications have been
+        grouped/merged. Clients that ignore grouping can ignore this.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          event:
+            type: string
+            const: notifications_merged
+      payload:
+        type: "null"
+
+    # Web Push
+    WebPushNotification:
+      name: WebPushNotification
+      title: Encrypted Web Push notification body
+      summary: |
+        Outbound RFC 8030 push message body (encrypted with aes128gcm
+        per RFC 8291). The plaintext, after decryption with the
+        subscription's `p256dh`/`auth` keys, is a JSON object describing
+        the notification.
+      contentType: application/octet-stream
+      headers:
+        type: object
+        properties:
+          Content-Encoding:
+            type: string
+            const: aes128gcm
+          TTL:
+            type: integer
+          Urgency:
+            type: string
+            enum: [very-low, low, normal, high]
+          Topic:
+            type: string
+      payload:
+        $ref: '#/components/schemas/WebPushPlaintext'
+
+  # ---------------------------------------------------------------------------
+  # Schemas
+  # ---------------------------------------------------------------------------
+  schemas:
+
+    SubscribeControl:
+      type: object
+      required: [type, stream]
+      properties:
+        type:
+          type: string
+          const: subscribe
+        stream:
+          $ref: '#/components/schemas/StreamName'
+        tag:
+          type: string
+          description: Required when `stream` is `hashtag` or `hashtag:local`.
+        list:
+          type: string
+          description: Required when `stream` is `list`.
+
+    UnsubscribeControl:
+      type: object
+      required: [type, stream]
+      properties:
+        type:
+          type: string
+          const: unsubscribe
+        stream:
+          $ref: '#/components/schemas/StreamName'
+        tag:
+          type: string
+        list:
+          type: string
+
+    StreamName:
+      type: string
+      enum:
+        - user
+        - user:notification
+        - public
+        - public:local
+        - public:remote
+        - public:media
+        - public:local:media
+        - hashtag
+        - hashtag:local
+        - list
+        - direct
+
+    WsStreamFrame:
+      type: object
+      required: [stream, event, payload]
+      properties:
+        stream:
+          type: array
+          description: |
+            Stream identifiers this event matched. For most streams a
+            single-element array (e.g. `["user"]`); for parameterised
+            streams the parameter is included (e.g. `["hashtag","foo"]`,
+            `["list","12345"]`).
+          items:
+            type: string
+          minItems: 1
+        event:
+          type: string
+          description: Event name (same set as the SSE `event:` names).
+          enum:
+            - update
+            - delete
+            - notification
+            - status.update
+            - conversation
+            - filters_changed
+            - announcement
+            - announcement.reaction
+            - announcement.delete
+            - notifications_merged
+        payload:
+          description: |
+            JSON-encoded payload. For object events (`update`,
+            `notification`, `status.update`, `conversation`,
+            `announcement`, `announcement.reaction`) this is a string
+            containing JSON that must be parsed by the client. For
+            `delete` and `announcement.delete` it is a bare string ID.
+            For `filters_changed` and `notifications_merged` it may be
+            absent or `null`.
+          oneOf:
+            - type: string
+            - type: "null"
+
+    WsErrorFrame:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+        status:
+          type: integer
+
+    # --- Mastodon entities (subset; only the fields most relevant to streaming) ---
+
+    Status:
+      type: object
+      description: |
+        Mastodon Status entity. See
+        https://docs.joinmastodon.org/entities/Status/ for the full schema.
+      required: [id, uri, created_at, account, content, visibility]
+      properties:
+        id:
+          type: string
+        uri:
+          type: string
+          format: uri
+        url:
+          type: string
+          format: uri
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        edited_at:
+          type: string
+          format: date-time
+          nullable: true
+        account:
+          $ref: '#/components/schemas/Account'
+        content:
+          type: string
+        visibility:
+          type: string
+          enum: [public, unlisted, private, direct]
+        sensitive:
+          type: boolean
+        spoiler_text:
+          type: string
+        language:
+          type: string
+          nullable: true
+        in_reply_to_id:
+          type: string
+          nullable: true
+        in_reply_to_account_id:
+          type: string
+          nullable: true
+        reblog:
+          oneOf:
+            - { type: "null" }
+            - $ref: '#/components/schemas/Status'
+        media_attachments:
+          type: array
+          items:
+            type: object
+        mentions:
+          type: array
+          items:
+            type: object
+        tags:
+          type: array
+          items:
+            type: object
+        emojis:
+          type: array
+          items:
+            type: object
+        replies_count:
+          type: integer
+        reblogs_count:
+          type: integer
+        favourites_count:
+          type: integer
+        application:
+          type: object
+          nullable: true
+
+    Account:
+      type: object
+      description: |
+        Mastodon Account entity (subset). See
+        https://docs.joinmastodon.org/entities/Account/.
+      required: [id, username, acct, url]
+      properties:
+        id: { type: string }
+        username: { type: string }
+        acct: { type: string }
+        display_name: { type: string }
+        url: { type: string, format: uri }
+        avatar: { type: string, format: uri }
+        avatar_static: { type: string, format: uri }
+        header: { type: string, format: uri }
+        header_static: { type: string, format: uri }
+        locked: { type: boolean }
+        bot: { type: boolean }
+        created_at: { type: string, format: date-time }
+        note: { type: string }
+        followers_count: { type: integer }
+        following_count: { type: integer }
+        statuses_count: { type: integer }
+
+    Notification:
+      type: object
+      description: |
+        Mastodon Notification entity. See
+        https://docs.joinmastodon.org/entities/Notification/.
+      required: [id, type, created_at, account]
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+            - mention
+            - status
+            - reblog
+            - follow
+            - follow_request
+            - favourite
+            - poll
+            - update
+            - admin.sign_up
+            - admin.report
+            - severed_relationships
+            - moderation_warning
+            - quote
+            - quoted_update
+        created_at:
+          type: string
+          format: date-time
+        account:
+          $ref: '#/components/schemas/Account'
+        status:
+          oneOf:
+            - { type: "null" }
+            - $ref: '#/components/schemas/Status'
+        report:
+          type: object
+          nullable: true
+          description: Present when `type` is `admin.report`.
+
+    Conversation:
+      type: object
+      description: |
+        Mastodon Conversation entity. See
+        https://docs.joinmastodon.org/entities/Conversation/.
+      required: [id, accounts, unread]
+      properties:
+        id:
+          type: string
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        unread:
+          type: boolean
+        last_status:
+          oneOf:
+            - { type: "null" }
+            - $ref: '#/components/schemas/Status'
+
+    Announcement:
+      type: object
+      description: |
+        Mastodon Announcement entity. See
+        https://docs.joinmastodon.org/entities/Announcement/.
+      required: [id, content, published_at, all_day]
+      properties:
+        id: { type: string }
+        content: { type: string }
+        starts_at: { type: string, format: date-time, nullable: true }
+        ends_at: { type: string, format: date-time, nullable: true }
+        all_day: { type: boolean }
+        published_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        read: { type: boolean }
+        mentions:
+          type: array
+          items:
+            type: object
+        statuses:
+          type: array
+          items:
+            type: object
+        tags:
+          type: array
+          items:
+            type: object
+        emojis:
+          type: array
+          items:
+            type: object
+        reactions:
+          type: array
+          items:
+            type: object
+
+    AnnouncementReactionPayload:
+      type: object
+      description: Payload for `announcement.reaction` events.
+      required: [name, count, announcement_id]
+      properties:
+        name:
+          type: string
+          description: Emoji shortcode or unicode character used as the reaction.
+        count:
+          type: integer
+          description: Updated total reaction count for that emoji.
+        announcement_id:
+          type: string
+          description: ID of the announcement the reaction is attached to.
+
+    WebPushPlaintext:
+      type: object
+      description: |
+        Plaintext JSON payload Mastodon places inside the encrypted Web
+        Push body. The exact shape is the Mastodon Web Push notification
+        payload (subject to change between server versions); the fields
+        below reflect the documented Mastodon implementation.
+      required:
+        - access_token
+        - notification_id
+        - notification_type
+        - title
+        - body
+      properties:
+        access_token:
+          type: string
+          description: |
+            The OAuth access token associated with the subscription, so
+            the receiving client can correlate the push to an account.
+        preferred_locale:
+          type: string
+          description: ISO 639 language code the user prefers.
+        notification_id:
+          type: string
+          description: ID of the Notification entity that triggered this push.
+        notification_type:
+          type: string
+          description: Notification type (same enum as `Notification.type`).
+          enum:
+            - mention
+            - status
+            - reblog
+            - follow
+            - follow_request
+            - favourite
+            - poll
+            - update
+            - admin.sign_up
+            - admin.report
+            - severed_relationships
+            - moderation_warning
+            - quote
+            - quoted_update
+        icon:
+          type: string
+          format: uri
+          description: URL of an icon to display with the notification.
+        title:
+          type: string
+          description: Short human-readable title for the notification.
+        body:
+          type: string
+          description: Longer human-readable body for the notification.

@@ -11,6 +11,8 @@ apis:
         type: Documentation
       - url: openapi/mastodon.yml
         type: OpenAPI
+      - url: asyncapi/mastodon-streaming.yml
+        type: AsyncAPI
     description: This is an OpenAPI for the Mastodon API.
 name: Mastodon
 tags:
@@ -20,7 +22,7 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2024-11-16'
-modified: '2026-04-28'
+modified: '2026-05-30'
 position: Consumer
 description: >-
   Mastodon is a open source, self-hosted, social networking service. Mastodon
