@@ -1,0 +1,6217 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mastodon API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/health"
+          },
+          "docs": "Returns ok to indicate server is up"
+        },
+        {
+          "info": {
+            "name": "GET /nodeinfo/2.0",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/nodeinfo/2.0"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/manifest"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /about/more",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/about/more"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "oauth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /oauth/authorize/native",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/oauth/authorize/native"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /oauth/authorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/oauth/authorize",
+            "params": [
+              {
+                "name": "response_type",
+                "value": "",
+                "type": "query",
+                "description": "Should be set equal to code."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Client ID, obtained during app registration."
+              },
+              {
+                "name": "redirect_uri",
+                "value": "",
+                "type": "query",
+                "description": "Set a URI to redirect the user to. If this parameter is set to urn:ietf:wg:oauth:2.0:oob then the authorization code will be shown instead. Must match one of the redirect URIs declared during app registration."
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "List of requested OAuth scopes, separated by spaces (or by pluses, if using query parameters). Must be a subset of scopes declared during app registration. If not provided, defaults to read."
+              },
+              {
+                "name": "force_login",
+                "value": "",
+                "type": "query",
+                "description": "Added in 2.6.0. Forces the user to re-login, which is necessary for authorizing with multiple accounts from the same instance."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /oauth/authorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/oauth/authorize"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /oauth/authorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/oauth/authorize"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /oauth/token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/oauth/token"
+          },
+          "docs": "Obtain an oauth token for API requests."
+        },
+        {
+          "info": {
+            "name": "POST /oauth/revoke",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/oauth/revoke"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /oauth/introspect",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/oauth/introspect"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /oauth/applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/oauth/applications"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /oauth/applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/oauth/applications"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /oauth/applications/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/oauth/applications/new"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /oauth/applications/{id}/edit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/oauth/applications/:id/edit",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /oauth/applications/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/oauth/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /oauth/applications/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/oauth/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /oauth/applications/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/oauth/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /oauth/applications/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/oauth/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /oauth/authorized_applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/oauth/authorized_applications"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /oauth/authorized_applications/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/oauth/authorized_applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "well-known",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /.well-known/host-meta",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/.well-known/host-meta"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /.well-known/nodeinfo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/.well-known/nodeinfo"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /.well-known/webfinger",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/.well-known/webfinger",
+            "params": [
+              {
+                "name": "resource",
+                "value": "",
+                "type": "query",
+                "description": "query target (URI)"
+              },
+              {
+                "name": "rel",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /.well-known/change-password",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/.well-known/change-password"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /.well-known/keybase-proof-config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/.well-known/keybase-proof-config"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "todo",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/intent"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /invite/invite_code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/invite/invite_code"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /authorize_follow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/authorize_follow"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/inbox"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /@{username}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/@:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /@{username}/with_replies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/@:username/with_replies",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /@{username}/media",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/@:username/media",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /@{username}/tagged/{tag}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/@:username/tagged/:tag",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /@{account_username}/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/@:account_username/:id",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /@{account_username}/{id}/embed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/@:account_username/:id/embed",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /interact/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/interact/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /interact/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/interact/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /explore",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/explore"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /media/{medium_id}/player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/media/:medium_id/player",
+            "params": [
+              {
+                "name": "medium_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /media/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/media/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /tags/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /emojis/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/emojis/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /invites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/invites"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /invites",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/invites"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /invites/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/invites/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/filters"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/filters"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /filters/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/filters/new"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /filters/{id}/edit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/filters/:id/edit",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /filters/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/filters/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /filters/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/filters/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /filters/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/filters/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /relationships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/relationships"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /relationships",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/relationships"
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /relationships",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/relationships"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /statuses_cleanup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/statuses_cleanup"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /statuses_cleanup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/statuses_cleanup"
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /statuses_cleanup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/statuses_cleanup"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /public",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/public"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /media_proxy/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/media_proxy/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /authorize_interaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/authorize_interaction"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /authorize_interaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/authorize_interaction"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /share",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/share"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /share",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/share"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/statuses/{status_id}/bookmark",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/statuses/:status_id/bookmark",
+            "params": [
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/polls/{poll_id}/votes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/polls/:poll_id/votes",
+            "params": [
+              {
+                "name": "poll_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /web(/*any)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/web(/*any)"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /about",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/about"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /terms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/terms"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ActivityPub",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /actor/inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/actor/inbox"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /actor/outbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/actor/outbox"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /actor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/actor"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /auth/setup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/setup"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /auth/setup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/auth/setup"
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /auth/setup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/auth/setup"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /auth/challenge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/challenge"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /auth/sessions/security_key_options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/sessions/security_key_options"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /auth/sign_in",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/sign_in"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /auth/sign_in",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/sign_in"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /auth/sign_out",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/auth/sign_out"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /auth/password/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/password/new"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /auth/password/edit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/password/edit"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /auth/password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/password"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /auth/password",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/auth/password"
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /auth/password",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/auth/password"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /auth/cancel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/cancel"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /auth/sign_up",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/sign_up"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /auth/edit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/edit"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/auth"
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/auth"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/auth"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /auth/confirmation/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/confirmation/new"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /auth/confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/confirmation"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /auth/confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/confirmation"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /users/{account_username}/remote_follow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:account_username/remote_follow",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /users/{account_username}/remote_follow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/:account_username/remote_follow",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /users/{account_username}/statuses/{id}/activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:account_username/statuses/:id/activity",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /users/{account_username}/statuses/{id}/embed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:account_username/statuses/:id/embed",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /users/{account_username}/statuses/{status_id}/replies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:account_username/statuses/:status_id/replies",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              },
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /users/{account_username}/statuses/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:account_username/statuses/:id",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /users/{account_username}/followers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:account_username/followers",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /users/{account_username}/following",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:account_username/following",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /users/{account_username}/follow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/:account_username/follow",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /users/{account_username}/unfollow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/:account_username/unfollow",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /users/{account_username}/outbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:account_username/outbox",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /users/{account_username}/inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/:account_username/inbox",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /users/{account_username}/claim",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/:account_username/claim",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /users/{account_username}/collections/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:account_username/collections/:id",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /users/{account_username}/followers_synchronization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:account_username/followers_synchronization",
+            "params": [
+              {
+                "name": "account_username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /users/{username}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "username of an account"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /settings/profile/pictures/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/settings/profile/pictures/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/profile"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /settings/profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/settings/profile"
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /settings/profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/settings/profile"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/preferences"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/preferences/appearance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/preferences/appearance"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /settings/preferences/appearance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/settings/preferences/appearance"
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /settings/preferences/appearance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/settings/preferences/appearance"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/preferences/notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/preferences/notifications"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /settings/preferences/notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/settings/preferences/notifications"
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /settings/preferences/notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/settings/preferences/notifications"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/preferences/other",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/preferences/other"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /settings/preferences/other",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/settings/preferences/other"
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /settings/preferences/other",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/settings/preferences/other"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/import",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/import"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/import"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/export"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/export"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/exports/follows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/exports/follows"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/exports/blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/exports/blocks"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/exports/mutes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/exports/mutes"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/exports/lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/exports/lists"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/exports/domain_blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/exports/domain_blocks"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/exports/bookmarks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/exports/bookmarks"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/two_factor_authentication_methods/disable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/two_factor_authentication_methods/disable"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/two_factor_authentication_methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/two_factor_authentication_methods"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/otp_authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/otp_authentication"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/otp_authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/otp_authentication"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/security_keys/options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/security_keys/options"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/security_keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/security_keys"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/security_keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/security_keys"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/security_keys/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/security_keys/new"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /settings/security_keys/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/settings/security_keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/two_factor_authentication/recovery_codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/two_factor_authentication/recovery_codes"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/two_factor_authentication/confirmation/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/two_factor_authentication/confirmation/new"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/two_factor_authentication/confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/two_factor_authentication/confirmation"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/identity_proofs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/identity_proofs"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/identity_proofs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/identity_proofs"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/identity_proofs/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/identity_proofs/new"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /settings/identity_proofs/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/settings/identity_proofs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/applications/{id}/regenerate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/applications/:id/regenerate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/applications"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/applications"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/applications/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/applications/new"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/applications/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /settings/applications/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/settings/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /settings/applications/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/settings/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /settings/applications/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/settings/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/delete"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /settings/delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/settings/delete"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/migration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/migration"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/migration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/migration"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/migration/redirect/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/migration/redirect/new"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/migration/redirect",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/migration/redirect"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /settings/migration/redirect",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/settings/migration/redirect"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/aliases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/aliases"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/aliases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/aliases"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /settings/aliases/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/settings/aliases/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /settings/sessions/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/settings/sessions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/featured_tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/featured_tags"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /settings/featured_tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/settings/featured_tags"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /settings/featured_tags/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/settings/featured_tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /settings/login_activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/login_activities"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /admin/dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/dashboard"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/domain_allows",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/domain_allows"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/domain_allows/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/domain_allows/new"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/domain_allows/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/domain_allows/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/domain_allows/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/domain_allows/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/domain_blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/domain_blocks"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/domain_blocks/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/domain_blocks/new"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/domain_blocks/{id}/edit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/domain_blocks/:id/edit",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/domain_blocks/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/domain_blocks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /admin/domain_blocks/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/admin/domain_blocks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /admin/domain_blocks/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/admin/domain_blocks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/domain_blocks/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/domain_blocks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/email_domain_blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/email_domain_blocks"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/email_domain_blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/email_domain_blocks"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/email_domain_blocks/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/email_domain_blocks/new"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/email_domain_blocks/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/email_domain_blocks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/action_logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/action_logs"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/warning_presets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/warning_presets"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/warning_presets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/warning_presets"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/warning_presets/{id}/edit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/warning_presets/:id/edit",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/warning_presets/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/warning_presets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /admin/warning_presets/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/admin/warning_presets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /admin/warning_presets/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/admin/warning_presets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/warning_presets/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/warning_presets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/announcements/{id}/publish",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/announcements/:id/publish",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/announcements/{id}/unpublish",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/announcements/:id/unpublish",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/announcements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/announcements"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/announcements",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/announcements"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/announcements/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/announcements/new"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/announcements/{id}/edit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/announcements/:id/edit",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /admin/announcements/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/admin/announcements/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /admin/announcements/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/admin/announcements/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/announcements/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/announcements/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/settings/edit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/settings/edit"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /admin/settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/admin/settings"
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /admin/settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/admin/settings"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/site_uploads/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/site_uploads/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/invites/deactivate_all",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/invites/deactivate_all"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/invites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/invites"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/invites",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/invites"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/invites/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/invites/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/relays/{id}/enable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/relays/:id/enable",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/relays/{id}/disable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/relays/:id/disable",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/relays",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/relays"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/relays",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/relays"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/relays/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/relays/new"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/relays/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/relays/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/instances/{id}/clear_delivery_errors",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/instances/:id/clear_delivery_errors",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/instances/{id}/restart_delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/instances/:id/restart_delivery",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/instances/{id}/stop_delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/instances/:id/stop_delivery",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/instances"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/instances/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/instances/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/rules"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/rules"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/rules/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/rules/new"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/rules/{id}/edit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/rules/:id/edit",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/rules/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /admin/rules/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/admin/rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /admin/rules/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/admin/rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/rules/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/reports/{id}/assign_to_self",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/reports/:id/assign_to_self",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/reports/{id}/unassign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/reports/:id/unassign",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/reports/{id}/reopen",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/reports/:id/reopen",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/reports/{id}/resolve",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/reports/:id/resolve",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/reports/{report_id}/reported_statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/reports/:report_id/reported_statuses",
+            "params": [
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/reports"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/reports/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/reports/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/report_notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/report_notes"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/report_notes/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/report_notes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{id}/enable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:id/enable",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{id}/unsensitive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:id/unsensitive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{id}/unsilence",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:id/unsilence",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{id}/unsuspend",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:id/unsuspend",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{id}/redownload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:id/redownload",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{id}/remove_avatar",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:id/remove_avatar",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{id}/remove_header",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:id/remove_header",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{id}/memorialize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:id/memorialize",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{id}/approve",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:id/approve",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{id}/reject",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:id/reject",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/accounts/{account_id}/change_email",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/change_email",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /admin/accounts/{account_id}/change_email",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/change_email",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /admin/accounts/{account_id}/change_email",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/change_email",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{account_id}/reset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/reset",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/accounts/{account_id}/action/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/action/new",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{account_id}/action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/action",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/accounts/{account_id}/statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/statuses",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{account_id}/statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/statuses",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/accounts/{account_id}/statuses/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/statuses/:id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /admin/accounts/{account_id}/statuses/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/statuses/:id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /admin/accounts/{account_id}/statuses/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/statuses/:id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/accounts/{account_id}/statuses/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/statuses/:id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/accounts/{account_id}/relationships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/relationships",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{account_id}/confirmation/resend",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/confirmation/resend",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{account_id}/confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/confirmation",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{account_id}/role/promote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/role/promote",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/accounts/{account_id}/role/demote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/accounts/:account_id/role/demote",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/accounts"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/accounts/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/accounts/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/pending_accounts/approve_all",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/pending_accounts/approve_all"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/pending_accounts/reject_all",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/pending_accounts/reject_all"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/pending_accounts/batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/pending_accounts/batch"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/pending_accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/pending_accounts"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/users/{user_id}/two_factor_authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/users/:user_id/two_factor_authentication",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/users/{user_id}/sign_in_token_authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/users/:user_id/sign_in_token_authentication",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/users/{user_id}/sign_in_token_authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/users/:user_id/sign_in_token_authentication",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/custom_emojis/batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/custom_emojis/batch"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/custom_emojis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/custom_emojis"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/custom_emojis",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/custom_emojis"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/custom_emojis/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/custom_emojis/new"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/ip_blocks/batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/ip_blocks/batch"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/ip_blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/ip_blocks"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/ip_blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/ip_blocks"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/ip_blocks/new",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/ip_blocks/new"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/account_moderation_notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/account_moderation_notes"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /admin/account_moderation_notes/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/admin/account_moderation_notes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/follow_recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/follow_recommendations"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /admin/follow_recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/admin/follow_recommendations"
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /admin/follow_recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/admin/follow_recommendations"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/tags/approve_all",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/tags/approve_all"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/tags/reject_all",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/tags/reject_all"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /admin/tags/batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/admin/tags/batch"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/tags"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin/tags/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /admin/tags/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/admin/tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /admin/tags/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/admin/tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /admin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "api",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/oembed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/oembed"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/proofs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/proofs"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/statuses/{status_id}/reblogged_by",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/statuses/:status_id/reblogged_by",
+            "params": [
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/statuses/{status_id}/favourited_by",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/statuses/:status_id/favourited_by",
+            "params": [
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/statuses/{status_id}/reblog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/statuses/:status_id/reblog",
+            "params": [
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/statuses/{status_id}/unreblog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/statuses/:status_id/unreblog",
+            "params": [
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/statuses/{status_id}/favourite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/statuses/:status_id/favourite",
+            "params": [
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/statuses/{status_id}/unfavourite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/statuses/:status_id/unfavourite",
+            "params": [
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/statuses/{status_id}/unbookmark",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/statuses/:status_id/unbookmark",
+            "params": [
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/statuses/{status_id}/mute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/statuses/:status_id/mute",
+            "params": [
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/statuses/{status_id}/unmute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/statuses/:status_id/unmute",
+            "params": [
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/statuses/{status_id}/pin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/statuses/:status_id/pin",
+            "params": [
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/statuses/{status_id}/unpin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/statuses/:status_id/unpin",
+            "params": [
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/statuses/{id}/context",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/statuses/:id/context",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/statuses"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/statuses/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/statuses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/statuses/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/statuses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/timelines/home",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/timelines/home"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/timelines/public",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/timelines/public"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/timelines/tag/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/timelines/tag/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/timelines/list/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/timelines/list/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/streaming",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/streaming"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/custom_emojis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/custom_emojis"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/suggestions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/suggestions"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/suggestions/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/suggestions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/scheduled_statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/scheduled_statuses"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/scheduled_statuses/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/scheduled_statuses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/v1/scheduled_statuses/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/scheduled_statuses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/scheduled_statuses/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/scheduled_statuses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/scheduled_statuses/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/scheduled_statuses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/preferences"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/v1/announcements/{announcement_id}/reactions/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/announcements/:announcement_id/reactions/:id",
+            "params": [
+              {
+                "name": "announcement_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/announcements/{announcement_id}/reactions/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/announcements/:announcement_id/reactions/:id",
+            "params": [
+              {
+                "name": "announcement_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/announcements/{announcement_id}/reactions/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/announcements/:announcement_id/reactions/:id",
+            "params": [
+              {
+                "name": "announcement_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/announcements/{id}/dismiss",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/announcements/:id/dismiss",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/announcements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/announcements"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/conversations/{id}/read",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/conversations/:id/read",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/conversations"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/conversations/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/conversations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/media",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/media"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/media/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/media/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/v1/media/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/media/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/media/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/media/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/blocks"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/mutes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/mutes"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/favourites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/favourites"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/bookmarks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/bookmarks"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/reports"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/trends",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/trends"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/filters"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/filters"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/filters/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/filters/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/v1/filters/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/filters/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/filters/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/filters/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/filters/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/filters/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/endorsements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/endorsements"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/markers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/markers"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/markers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/markers"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/apps/verify_credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/apps/verify_credentials"
+          },
+          "docs": "Confirm that the app's OAuth2 credentials work."
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/apps"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/emails/confirmations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/emails/confirmations"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/instance/peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/instance/peers"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/instance/activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/instance/activity"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/instance/rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/instance/rules"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/instance"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/domain_blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/domain_blocks"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/domain_blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/domain_blocks"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/domain_blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/domain_blocks"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/directory"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/follow_requests/{id}/authorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/follow_requests/:id/authorize",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/follow_requests/{id}/reject",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/follow_requests/:id/reject",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/follow_requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/follow_requests"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/notifications/clear",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/notifications/clear"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/notifications/{id}/dismiss",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/notifications/:id/dismiss",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/notifications"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/notifications/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/notifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/accounts/verify_credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/accounts/verify_credentials"
+          },
+          "docs": "Test to make sure that the user token works."
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/accounts/update_credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/accounts/update_credentials"
+          },
+          "docs": "Update the user's display and preferences."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/accounts/search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/accounts/search"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/accounts/lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/accounts/lookup"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/accounts/relationships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/accounts/relationships"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/accounts/{id}/statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/accounts/:id/statuses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the account in the database"
+              }
+            ]
+          },
+          "docs": "Statuses posted to the given account."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/accounts/{id}/followers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/accounts/:id/followers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the account in the database"
+              },
+              {
+                "name": "max_id",
+                "value": "",
+                "type": "query",
+                "description": "Internal parameter. Use HTTP Link header for pagination."
+              },
+              {
+                "name": "since_id",
+                "value": "",
+                "type": "query",
+                "description": "Internal parameter. Use HTTP Link header for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. Defaults to 40."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/accounts/{account_id}/following",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/accounts/:account_id/following",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/accounts/{account_id}/lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/accounts/:account_id/lists",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/accounts/{account_id}/identity_proofs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/accounts/:account_id/identity_proofs",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/accounts/{account_id}/featured_tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/accounts/:account_id/featured_tags",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/accounts/{id}/follow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/accounts/:id/follow",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/accounts/{id}/unfollow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/accounts/:id/unfollow",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/accounts/{id}/remove_from_followers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/accounts/:id/remove_from_followers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/accounts/{id}/block",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/accounts/:id/block",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/accounts/{id}/unblock",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/accounts/:id/unblock",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/accounts/{id}/mute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/accounts/:id/mute",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/accounts/{id}/unmute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/accounts/:id/unmute",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/accounts/{account_id}/pin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/accounts/:account_id/pin",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/accounts/{account_id}/unpin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/accounts/:account_id/unpin",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/accounts/{account_id}/note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/accounts/:account_id/note",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/accounts"
+          },
+          "docs": "Creates a user and account records. Returns an account access token for the app that initiated the request. The app should save this token for later, and should wait for the user to confirm their account by clicking a link in their email inbox."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/accounts/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the account in the database"
+              }
+            ]
+          },
+          "docs": "View information about a profile."
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/lists/{list_id}/accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/lists/:list_id/accounts",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/lists/{list_id}/accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/lists/:list_id/accounts",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/lists/{list_id}/accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/lists/:list_id/accounts",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/lists"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/lists"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/lists/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/v1/lists/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/lists/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/lists/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/featured_tags/suggestions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/featured_tags/suggestions"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/featured_tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/featured_tags"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/featured_tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/featured_tags"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/featured_tags/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/featured_tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/polls",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/polls"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/polls/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/polls/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/push/subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/push/subscription"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/push/subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/push/subscription"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/v1/push/subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/push/subscription"
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/v1/push/subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/push/subscription"
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/push/subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/push/subscription"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/accounts/{id}/enable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/accounts/:id/enable",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/accounts/{id}/unsensitive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/accounts/:id/unsensitive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/accounts/{id}/unsilence",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/accounts/:id/unsilence",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/accounts/{id}/unsuspend",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/accounts/:id/unsuspend",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/accounts/{id}/approve",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/accounts/:id/approve",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/accounts/{id}/reject",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/accounts/:id/reject",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/accounts/{account_id}/action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/accounts/:account_id/action",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/admin/accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/admin/accounts"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/admin/accounts/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/admin/accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DELETE /api/v1/admin/accounts/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/admin/accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/reports/{id}/assign_to_self",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/reports/:id/assign_to_self",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/reports/{id}/unassign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/reports/:id/unassign",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/reports/{id}/reopen",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/reports/:id/reopen",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/reports/{id}/resolve",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/reports/:id/resolve",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/admin/reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/admin/reports"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/admin/reports/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/admin/reports/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/admin/trends",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/admin/trends"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/measures",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/measures"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/dimensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/dimensions"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/admin/retention",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admin/retention"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v2/media",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v2/media"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v2/search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v2/search"
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v2/suggestions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v2/suggestions"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/web/settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/web/settings"
+          }
+        },
+        {
+          "info": {
+            "name": "PATCH /api/web/settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/web/settings"
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/web/embed",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/web/embed"
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/web/push_subscriptions/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/web/push_subscriptions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/web/push_subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/web/push_subscriptions"
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
