@@ -35,6 +35,8 @@ maintainers:
     email: info@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: DomainSecurity
+    url: security/mastodon-domain-security.yml
   - type: GitHubOrganization
     url: https://github.com/mastodon
   - type: LinkedIn
@@ -56,3 +58,6 @@ common:
     description: This is an API Evangelist workspace.
     url: https://www.postman.com/api-evangelist/mastodon/overview
     type: PostmanWorkspace
+  - name: Mastodon Blog
+    url: https://blog.joinmastodon.org/index.xml
+    type: Blog
