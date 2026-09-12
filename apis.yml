@@ -58,6 +58,8 @@ maintainers:
     email: info@apievangelist.com
 specificationVersion: '0.23'
 common:
+  - type: Website
+    url: https://www.joinmastodon.org/
   - type: DomainSecurity
     url: security/mastodon-domain-security.yml
   - type: GitHubOrganization
