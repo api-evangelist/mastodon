@@ -4,6 +4,8 @@ apis:
   - aid: mastodon:mastodon
     name: Mastodon API
     tags:
+      - Social Network
+    tags_raw:
       - Social Networks
     humanURL: https://docs.joinmastodon.org/
     properties:
@@ -16,6 +18,9 @@ apis:
     description: This is an OpenAPI for the Mastodon API.
 name: Mastodon
 tags:
+  - Open-Source
+  - Social Network
+tags_raw:
   - Open-Source
   - Social Networks
 type: Index
