@@ -18,11 +18,15 @@ apis:
     description: This is an OpenAPI for the Mastodon API.
 name: Mastodon
 tags:
-  - Open-Source
+  - Open Source
   - Social Network
+  - Real-Time
+  - Social
 tags_raw:
   - Open-Source
   - Social Networks
+  - Real-Time
+  - Social
 type: Index
 deliveryModel:
   model: unknown
