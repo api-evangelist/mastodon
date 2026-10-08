@@ -67,6 +67,10 @@ maintainers:
     email: info@apievangelist.com
 specificationVersion: '0.23'
 common:
+  - type: Plans
+    url: plans/mastodon-plans-pricing.yml
+  - type: FinOps
+    url: finops/mastodon-finops.yml
   - type: Website
     url: https://www.joinmastodon.org/
   - type: DomainSecurity
