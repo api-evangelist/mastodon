@@ -1,0 +1,12 @@
+fetched: '2026-10-15'
+method: fetched
+source: https://docs.joinmastodon.org/spec/activitypub/
+page: https://docs.joinmastodon.org/spec/activitypub/
+file: mastodon-activitypub-1.md
+bytes: 36877
+sha256: 09c75e2555b9bcf80638acd307f7c97788298d05e1b7c17ea29f147df0796691
+anchor: activitypub
+shape: activitypub
+classification: no-compatibility-statement
+quote: null
+note: text extracted from the provider's own page (tags stripped), saved for evidence

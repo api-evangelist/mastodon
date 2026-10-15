@@ -1,0 +1,14 @@
+fetched: '2026-10-15'
+method: fetched
+source: https://raw.githubusercontent.com/mastodon/mastodon/main/README.md
+page: https://raw.githubusercontent.com/mastodon/mastodon/main/README.md
+file: mastodon-activitypub-2.md
+bytes: 6941
+sha256: e3a190d61134be9467b181bd7123133e635525ea0ee65466e7e50c643b547f96
+anchor: activitypub
+shape: activitypub
+classification: declares-compatibility
+quote: 'Mastodon is a **free, open-source social network server** based on [ActivityPub](https://www.w3.org/TR/activitypub/)
+  where users can follow friends and discover new ones. On Mastodon, users can publish anything they want: links,
+  pictures, text, and video. All Mastodon servers are interoperable as a '
+note: text extracted from the provider's own page (tags stripped), saved for evidence

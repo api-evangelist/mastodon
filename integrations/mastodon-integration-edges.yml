@@ -1,0 +1,20 @@
+edges:
+- partner_name: ActivityPub
+  partner: activitypub
+  partner_match: shape-anchor
+  channel: provider-built
+  relationship: compatible
+  direction: provider-built
+  shape: activitypub
+  type: docs
+  degree: declared-unqualified
+  evidence: https://raw.githubusercontent.com/mastodon/mastodon/main/README.md
+  evidence_kind: own-docs
+  evidence_file: https://github.com/api-evangelist/mastodon/blob/main/evidence/compatibility/mastodon-activitypub-2.md
+  quote: 'Mastodon is a **free, open-source social network server** based on [ActivityPub](https://www.w3.org/TR/activitypub/)
+    where users can follow friends and discover new ones. On Mastodon, users can publish anything they want: links,
+    pictures, t'
+  detected_by: sweep-shape-compat.py
+  first_seen: '2026-10-15'
+generated: '2026-10-15'
+method: searched
