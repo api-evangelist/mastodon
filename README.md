@@ -1,4 +1,4 @@
-# Mastodon (mastodon)
+# Mastodon
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,55 +66,137 @@
 
 Mastodon is a open source, self-hosted, social networking service. Mastodon uses the ActivityPub protocol for federation which allows users to communicate between independent Mastodon instances and other ActivityPub compatible services. Mastodon has microblogging features similar to Twitter, and is generally considered to be a part of the Fediverse.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-search/mastodon/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-search/mastodon/refs/heads/main/apis.yml)
+**Areas:** Open Source · Social Network · Real-Time · Social
 
-## Scope
+## Mastodon on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Mastodon is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/mastodon/](https://apis.io/providers/mastodon/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (1)
 
-- Open-Source
-- Social Networks
+- [Mastodon API](https://apis.io/apis/mastodon/mastodon/) — This is an OpenAPI for the Mastodon API.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-11-16
-- **Modified:** 2026-05-30
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Mastodon API
+Event-driven and webhook contracts.
 
-This is an OpenAPI for the Mastodon API.
+- [Mastodon Streaming and Web Push API](https://apis.io/asyncapis/mastodon/mastodon-streaming/)
 
-- **Human URL:** [https://docs.joinmastodon.org/](https://docs.joinmastodon.org/)
+#### Event channels (12)
 
-#### Tags
+Individual events and webhooks the provider emits.
 
-- Social Networks
+- [/api/v1/streaming](https://apis.io/channels/mastodon/api-v1-streaming/)
+- [/api/v1/streaming/direct](https://apis.io/channels/mastodon/api-v1-streaming-direct/)
+- [/api/v1/streaming/hashtag](https://apis.io/channels/mastodon/api-v1-streaming-hashtag/)
+- [/api/v1/streaming/hashtag/local](https://apis.io/channels/mastodon/api-v1-streaming-hashtag-local/)
+- [/api/v1/streaming/health](https://apis.io/channels/mastodon/api-v1-streaming-health/)
+- [/api/v1/streaming/list](https://apis.io/channels/mastodon/api-v1-streaming-list/)
+- [/api/v1/streaming/public](https://apis.io/channels/mastodon/api-v1-streaming-public/)
+- [/api/v1/streaming/public/local](https://apis.io/channels/mastodon/api-v1-streaming-public-local/)
+- [/api/v1/streaming/public/remote](https://apis.io/channels/mastodon/api-v1-streaming-public-remote/)
+- [/api/v1/streaming/user](https://apis.io/channels/mastodon/api-v1-streaming-user/)
+- [/api/v1/streaming/user/notification](https://apis.io/channels/mastodon/api-v1-streaming-user-notification/)
+- [webpush/{endpoint}](https://apis.io/channels/mastodon/webpush-endpoint/)
 
-#### Properties
+#### Collections (1)
 
-- [Documentation](https://docs.joinmastodon.org/client/intro/)
-- [OpenAPI](openapi/mastodon.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mastodon.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mastodon.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [AsyncAPI](asyncapi/mastodon-streaming.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
+Postman and Open Collection request collections.
 
-## Common Properties
+- [Mastodon API](https://apis.io/collections/mastodon/open-mastodon/)
 
-- [GitHub Organization](https://github.com/mastodon)
-- [LinkedIn](https://www.linkedin.com/company/joinmastodon)
-- [Getting Started](https://docs.joinmastodon.org/client/intro/)
-- [Rate Limits](https://docs.joinmastodon.org/api/rate-limits/)
-- [Authentication](https://docs.joinmastodon.org/api/oauth-tokens/)
-- [Oauth Scopes](https://docs.joinmastodon.org/api/oauth-scopes/)
-- [Postman Workspace](https://www.postman.com/api-evangelist/mastodon/overview)
+#### Governance rules (1)
 
-## Maintainers
+Spectral rulesets for the provider's contracts.
 
-**FN:** Kin Lane
-**Email:** info@apievangelist.com
+- [Mastodon — asyncapi rules](https://apis.io/rules/mastodon/mastodon-asyncapi-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Mastodon Domain Security](https://apis.io/security/mastodon/mastodon-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Mastodon Plans Pricing](https://apis.io/plans/mastodon/mastodon-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Mastodon Rate Limits](https://apis.io/rate-limits/mastodon/mastodon-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Mastodon Finops](https://apis.io/finops/mastodon/mastodon-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.joinmastodon.org/)
+- [Getting started](https://docs.joinmastodon.org/client/intro/)
+- [Blog](https://blog.joinmastodon.org/index.xml)
+- [GitHub](https://github.com/mastodon)
+
+## API Evangelist rating
+
+**Kin Score 26.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 48.2 |
+| Contract quality | 39.2 |
+| Contract governance | 11.4 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 40.5 |
+| Access clarity | 7.9 |
+
+**Agent readiness 23.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/mastodon/](https://apis.io/providers/mastodon/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Mastodon: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/mastodon/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
